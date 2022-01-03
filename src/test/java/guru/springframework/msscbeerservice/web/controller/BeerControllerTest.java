@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.UUID;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 
 @WebMvcTest(BeerController.class)
 class BeerControllerTest
@@ -25,9 +27,9 @@ class BeerControllerTest
 	@Test
 	void getBeerById() throws Exception
 	{
-		mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/beer/" + UUID.randomUUID().toString())
+		mockMvc.perform(get("/api/v1/beer/" + UUID.randomUUID().toString())
 						.accept(MediaType.APPLICATION_JSON))
-						.andExpect(MockMvcResultMatchers.status().isOk());
+						.andExpect(status().isOk());
 	}
 
 	@Test
@@ -36,10 +38,10 @@ class BeerControllerTest
 		BeerDto beerDto = BeerDto.builder().build();
 		String beerDtoJson = objectMapper.writeValueAsString(beerDto);
 
-		mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/beer/")
+		mockMvc.perform(post("/api/v1/beer/")
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(beerDtoJson))
-			.andExpect(MockMvcResultMatchers.status().isCreated());
+			.andExpect(status().isCreated());
 	}
 
 	@Test
@@ -48,9 +50,9 @@ class BeerControllerTest
 		BeerDto beerDto = BeerDto.builder().build();
 		String beerDtoJson = objectMapper.writeValueAsString(beerDto);
 
-		mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/beer/" + UUID.randomUUID().toString())
+		mockMvc.perform(put("/api/v1/beer/" + UUID.randomUUID().toString())
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(beerDtoJson))
-			.andExpect(MockMvcResultMatchers.status().isNoContent());
+			.andExpect(status().isNoContent());
 	}
 }
