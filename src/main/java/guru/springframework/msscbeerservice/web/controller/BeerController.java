@@ -20,17 +20,30 @@ public class BeerController
 	}
 
 	@PostMapping
-	public ResponseEntity saveNewBeer(@RequestBody BeerDto beerDto)
+	public ResponseEntity<UUID> saveNewBeer(@RequestBody BeerDto beerDto)
 	{
 		// TODO megcsinálni
- 		return new ResponseEntity(HttpStatus.CREATED);
+		System.out.println("BeerDTO: " + beerDto);
+
+		ResponseEntity responseEntity = new ResponseEntity<UUID>(beerDto.getId(), HttpStatus.CREATED);
+
+		System.out.println("ResponseEntity: " + responseEntity.toString());
+
+ 		return responseEntity;
 	}
 
 	@PutMapping("/{beerId}")
 	public ResponseEntity updateBeerById(@PathVariable("beerId") UUID beerId, @RequestBody BeerDto beerDto)
 	{
 		// TODO megcsinálni
-		return new ResponseEntity(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+
+	@DeleteMapping("/{beerId}")
+	public ResponseEntity deleteBeerById(@PathVariable("beerId") UUID beerId)
+	{
+		// TODO megcsinálni
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
 
