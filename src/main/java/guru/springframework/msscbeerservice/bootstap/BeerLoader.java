@@ -45,6 +45,7 @@ public class BeerLoader implements CommandLineRunner
 				.price(new BigDecimal("220"))
 				.build());
 
+			System.out.println("Default upload beer: " + beerRepository.count());
 		}
 
 		System.out.println("Existing beer: " + beerRepository.count());
