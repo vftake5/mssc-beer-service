@@ -3,13 +3,9 @@ package guru.springframework.msscbeerservice.web.controller;
 import guru.springframework.msscbeerservice.web.model.BeerDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -60,16 +56,16 @@ public class BeerController
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
-	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public ResponseEntity<List> validationErrorHandler(MethodArgumentNotValidException e)
-	{
-		List<ObjectError> errorList = e.getAllErrors();
-		List<String> error = new ArrayList<>(errorList.size());
-
-		e.getAllErrors().forEach(argNotValid -> {
-			error.add(argNotValid.toString() + " | " + argNotValid.getCode() + " : " + argNotValid.getDefaultMessage());
-		});
-
-		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
-	}
+//	@ExceptionHandler(MethodArgumentNotValidException.class)
+//	public ResponseEntity<List> validationErrorHandler(MethodArgumentNotValidException e)
+//	{
+//		List<ObjectError> errorList = e.getAllErrors();
+//		List<String> error = new ArrayList<>(errorList.size());
+//
+//		e.getAllErrors().forEach(argNotValid -> {
+//			error.add(argNotValid.toString() + " | " + argNotValid.getCode() + " : " + argNotValid.getDefaultMessage());
+//		});
+//
+//		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+//	}
 }
