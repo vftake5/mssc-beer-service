@@ -22,7 +22,9 @@ public class MvcExceptionHandler
 		List<String> error = new ArrayList<>(errorList.size());
 
 		e.getAllErrors().forEach(argNotValid -> {
-			error.add(argNotValid.toString() + " | " + argNotValid.getCode() + " : " + argNotValid.getDefaultMessage());
+			String err = argNotValid.toString() + " | " + argNotValid.getCode() + " : " + argNotValid.getDefaultMessage();
+			System.out.println("ERROR: " + err);
+			error.add(err);
 		});
 
 		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
