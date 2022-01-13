@@ -4,7 +4,7 @@ jobs:
   build:
 
     docker:
-      - image: circleci/openjdk:11-browser-legacy
+      - image: circleci/openjdk:11-browsers-legacy
 
     working_directory: ~/repo
 
