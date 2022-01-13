@@ -1,6 +1,7 @@
 package guru.springframework.msscbeerservice.web.controller;
 
 import guru.springframework.msscbeerservice.web.model.BeerDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -17,6 +18,7 @@ import java.util.UUID;
  * Client oldalon a kezelését lásd guru.springframework.msscbreweryclient.web.client.BreweryClient.saveNewBeerW(BeerDto beerDto)
  */
 
+@Slf4j
 @RequestMapping("/api/v1/beer")
 @RestController
 public class BeerController
@@ -33,6 +35,8 @@ public class BeerController
 	public ResponseEntity<UUID> saveNewBeer(@RequestBody @Validated BeerDto beerDto)
 	{
 		// TODO megcsinálni
+		log.debug("Start saveNewBeer...");
+
 		beerDto.setId(UUID.randomUUID());
 
 		System.out.println("BeerDTO: " + beerDto);
