@@ -1,6 +1,8 @@
 package guru.springframework.msscbeerservice.web.controller;
 
+import guru.springframework.msscbeerservice.services.BeerService;
 import guru.springframework.msscbeerservice.web.model.BeerDto;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,48 +20,39 @@ import java.util.UUID;
  * Client oldalon a kezelését lásd guru.springframework.msscbreweryclient.web.client.BreweryClient.saveNewBeerW(BeerDto beerDto)
  */
 
+@RequiredArgsConstructor
 @Slf4j
 @RequestMapping("/api/v1/beer")
 @RestController
 public class BeerController
 {
 
+	private final BeerService beerService;
+
 	@GetMapping("/{beerId}")
 	public ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") UUID beerId)
 	{
-		// TODO megcsinálni
-		return new ResponseEntity<>(BeerDto.builder().build(), HttpStatus.OK);
+		return new ResponseEntity<>(beerService.getById(beerId), HttpStatus.OK);
 	}
 
 	@PostMapping
-	public ResponseEntity<UUID> saveNewBeer(@RequestBody @Validated BeerDto beerDto)
+	public ResponseEntity saveNewBeer(@RequestBody @Validated BeerDto beerDto)
 	{
-		// TODO megcsinálni
-		log.debug("Start saveNewBeer...");
-
-		beerDto.setId(UUID.randomUUID());
-
-		System.out.println("BeerDTO: " + beerDto);
-
-		ResponseEntity responseEntity = new ResponseEntity<UUID>(beerDto.getId(), HttpStatus.CREATED);
-
-		System.out.println("ResponseEntity: " + responseEntity.toString());
-
- 		return responseEntity;
+		return new ResponseEntity<>(beerService.saveNewBeer(beerDto), HttpStatus.OK);
 	}
 
 	@PutMapping("/{beerId}")
 	public ResponseEntity updateBeerById(@PathVariable("beerId") UUID beerId, @RequestBody @Validated BeerDto beerDto)
 	{
-		// TODO megcsinálni
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-	}
+		return new ResponseEntity<>(beerService.updateById(beerId, beerDto), HttpStatus.NO_CONTENT);
+ 	}
 
 	@DeleteMapping("/{beerId}")
 	public ResponseEntity deleteBeerById(@PathVariable("beerId") UUID beerId)
 	{
 		// TODO megcsinálni
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(beerService.deleteById(beerId), HttpStatus.NO_CONTENT);
+//		return ;
 	}
 
 //	@ExceptionHandler(MethodArgumentNotValidException.class)
