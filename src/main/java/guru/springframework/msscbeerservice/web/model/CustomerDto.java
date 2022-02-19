@@ -19,7 +19,7 @@ public class CustomerDto
 	private UUID id;
 
 	@NotBlank
-	@Size(min = 3, max = 100)
+	@Size(min = 2, max = 100)
 	private String name;
 
 	private String nationality;
