@@ -1,6 +1,8 @@
 sfg:
   brewery:
-    beer-inventory-service_host: http://localhost:8082
+    beer-inventory-service-host: http://localhost:8082
+    inventory-user: good
+    inventory-password: beer
 spring:
   jpa:
     defer-datasource-initialization: true
