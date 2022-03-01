@@ -36,7 +36,7 @@ public class BeerDto
 	@NotBlank
 	private String beerName;
 
-	private BeerStyleEnum beerType;
+	private BeerStyleEnum beerStyle;
 
 	@NotNull
 	private String upc;

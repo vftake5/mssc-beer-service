@@ -18,7 +18,7 @@ import java.util.UUID;
 
 @Profile("!local-discovery")
 @Slf4j
-@ConfigurationProperties(prefix = "sfg.brewery", ignoreUnknownFields = true)
+@ConfigurationProperties(prefix = "sfg.brewery" /*, ignoreUnknownFields = true*/)
 @Component
 public class BeerInventoryServiceRestTemplateImpl implements BeerInventoryService
 {
@@ -45,10 +45,11 @@ public class BeerInventoryServiceRestTemplateImpl implements BeerInventoryServic
 
 		ResponseEntity<List<BeerInventoryDto>> responseEntity = restTemplate
 			.exchange(beerInventoryServiceHost + INVENTORY_PATH, HttpMethod.GET, null,
-				new ParameterizedTypeReference<List<BeerInventoryDto>>(){}, (Object) beerId);
+				new ParameterizedTypeReference<>(){}, beerId);
 
 		//sum from inventory list
-		Integer onHand = Objects.requireNonNull(responseEntity.getBody())
+		int onHand;
+		onHand = Objects.requireNonNull(responseEntity.getBody())
 			.stream()
 			.mapToInt(BeerInventoryDto::getQuantityOnHand)
 			.sum();

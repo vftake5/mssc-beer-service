@@ -50,7 +50,7 @@ public class BeerServiceImpl implements BeerService
 			beerPagedList = new BeerPagedList(beerPage
 				.getContent()
 				.stream()
-				.map(beerMapper::beerToBeerDtoWithInventory)
+				.map(beerInvMapper::beerToBeerDtoWI)
 				.collect(Collectors.toList()),
 				PageRequest
 					.of(beerPage.getPageable().getPageNumber(),
@@ -92,7 +92,8 @@ public class BeerServiceImpl implements BeerService
 		Beer beer = beerRepository.findById(beerId).orElseThrow(NotFoundException::new);
 
 		beer.setBeerName(beerDto.getBeerName());
-		beer.setBeerStyle(beerDto.getBeerType().name());
+//		beer.setBeerStyle(beerDto.getBeerType().name());
+		beer.setBeerStyle(beerDto.getBeerStyle().name());
 		beer.setPrice(beerDto.getPrice());
 		beer.setUpc(beerDto.getUpc());
 
