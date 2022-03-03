@@ -39,7 +39,7 @@ class BeerControllerTest
 	void getBeerById() throws Exception
 	{
 		val beerDto = BeerDto.builder().beerName("New beer").upc(BeerLoader.BEER_1_UPC).beerStyle(BeerStyleEnum.PILSNER).price(new BigDecimal("120")).build();
-		given(beerService.getById(any())).willReturn(beerDto);
+		given(beerService.getById(any(), false)).willReturn(beerDto);
 
 		mockMvc.perform(get("/api/v1/beer/" + UUID.randomUUID())
 						.accept(MediaType.APPLICATION_JSON))
