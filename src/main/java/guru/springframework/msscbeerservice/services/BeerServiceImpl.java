@@ -2,7 +2,6 @@ package guru.springframework.msscbeerservice.services;
 
 import guru.springframework.msscbeerservice.domain.Beer;
 import guru.springframework.msscbeerservice.repositories.BeerRepository;
-import guru.springframework.msscbeerservice.web.mapper.BeerInvMapper;
 import guru.springframework.msscbeerservice.web.mapper.BeerMapper;
 import guru.springframework.msscbeerservice.web.model.BeerDto;
 import guru.springframework.msscbeerservice.web.model.BeerPagedList;
@@ -23,7 +22,6 @@ public class BeerServiceImpl implements BeerService
 {
 	private final BeerRepository beerRepository;
 	private final BeerMapper beerMapper;
-	private final BeerInvMapper beerInvMapper;
 
 
 	@Cacheable(cacheNames = "beerListCache", condition = "#showInventoryOnHand == false ")
@@ -50,7 +48,7 @@ public class BeerServiceImpl implements BeerService
 			beerPagedList = new BeerPagedList(beerPage
 				.getContent()
 				.stream()
-				.map(beerInvMapper::beerToBeerDtoWI)
+				.map(beerMapper::beerToBeerDtoWithInventory)
 				.collect(Collectors.toList()),
 				PageRequest
 					.of(beerPage.getPageable().getPageNumber(),
@@ -60,8 +58,7 @@ public class BeerServiceImpl implements BeerService
 			beerPagedList = new BeerPagedList(beerPage
 				.getContent()
 				.stream()
-//				.map(beerMapper::beerToBeerDto)
-				.map(beerInvMapper::beerToBeerDtoWI)
+				.map(beerMapper::beerToBeerDtoWithInventory)
 				.collect(Collectors.toList()),
 				PageRequest
 					.of(beerPage.getPageable().getPageNumber(),
