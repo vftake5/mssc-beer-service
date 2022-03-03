@@ -17,6 +17,7 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -39,7 +40,7 @@ class BeerControllerTest
 	void getBeerById() throws Exception
 	{
 		val beerDto = BeerDto.builder().beerName("New beer").upc(BeerLoader.BEER_1_UPC).beerStyle(BeerStyleEnum.PILSNER).price(new BigDecimal("120")).build();
-		given(beerService.getById(any(), false)).willReturn(beerDto);
+		given(beerService.getById(any(), anyBoolean())).willReturn(beerDto);
 
 		mockMvc.perform(get("/api/v1/beer/" + UUID.randomUUID())
 						.accept(MediaType.APPLICATION_JSON))
