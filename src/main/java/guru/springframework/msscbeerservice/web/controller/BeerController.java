@@ -25,7 +25,7 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("/api/v1/beer")
+@RequestMapping("/api/v1/")
 @RestController
 public class BeerController
 {
@@ -34,7 +34,7 @@ public class BeerController
 
 	private final BeerService beerService;
 
-	@GetMapping(produces = { "application/json" })
+	@GetMapping(produces = { "application/json" }, path = "beer")
 	public ResponseEntity<BeerPagedList> listBeers(@RequestParam(value = "pageNumber", required = false) Integer pageNumber,
 		@RequestParam(value = "pageSize", required = false) Integer pageSize,
 		@RequestParam(value = "beerName", required = false) String beerName,
@@ -61,7 +61,7 @@ public class BeerController
 		return new ResponseEntity<>(beerList, HttpStatus.OK);
 	}
 
-	@GetMapping("/{beerId}")
+	@GetMapping("beer/{beerId}")
 	public ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") UUID beerId,
 		@RequestParam(value = "showInventoryOnHand", required = false) Boolean showInventoryOnHand)
 	{
@@ -73,19 +73,32 @@ public class BeerController
 		return new ResponseEntity<>(beerService.getById(beerId, showInventoryOnHand), HttpStatus.OK);
 	}
 
-	@PostMapping
+	@GetMapping("beerUpc/{upc}")
+	public ResponseEntity<BeerDto> getBeerByUpc(@PathVariable("upc") String upc,
+		@RequestParam(value = "showInventoryOnHand", required = false) Boolean showInventoryOnHand)
+	{
+		if (showInventoryOnHand == null)
+		{
+			showInventoryOnHand = false;
+		}
+
+		return new ResponseEntity<>(beerService.getByUpc(upc, showInventoryOnHand), HttpStatus.OK);
+	}
+
+
+	@PostMapping(path = "beer")
 	public ResponseEntity saveNewBeer(@RequestBody @Validated BeerDto beerDto)
 	{
 		return new ResponseEntity<>(beerService.saveNewBeer(beerDto), HttpStatus.CREATED);
 	}
 
-	@PutMapping("/{beerId}")
+	@PutMapping("beer/{beerId}")
 	public ResponseEntity updateBeerById(@PathVariable("beerId") UUID beerId, @RequestBody @Validated BeerDto beerDto)
 	{
 		return new ResponseEntity<>(beerService.updateById(beerId, beerDto), HttpStatus.NO_CONTENT);
  	}
 
-	@DeleteMapping("/{beerId}")
+	@DeleteMapping("beer/{beerId}")
 	public ResponseEntity deleteBeerById(@PathVariable("beerId") UUID beerId)
 	{
 		// TODO megcsinálni

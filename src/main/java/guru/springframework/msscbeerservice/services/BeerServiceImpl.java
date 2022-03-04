@@ -30,16 +30,17 @@ public class BeerServiceImpl implements BeerService
 	{
 		BeerPagedList beerPagedList;
 		Page<Beer> beerPage;
+		String beerStyleName = beerStyle == null ? null : beerStyle.name();
 
-		System.out.println("  -------- listBeers called ------");
+//		System.out.println("  -------- listBeers called ------");
 
-		if (!StringUtils.isEmpty(beerName) && !StringUtils.isEmpty(beerStyle)) {
+		if (StringUtils.hasLength(beerName) && StringUtils.hasLength(beerStyleName)) {
 			//search both
 			beerPage = beerRepository.findAllByBeerNameAndBeerStyle(beerName, beerStyle, pageRequest);
-		} else if (!StringUtils.isEmpty(beerName) && StringUtils.isEmpty(beerStyle)) {
+		} else if (StringUtils.hasLength(beerName) && !StringUtils.hasLength(beerStyleName)) {
 			//search beer_service name
 			beerPage = beerRepository.findAllByBeerName(beerName, pageRequest);
-		} else if (StringUtils.isEmpty(beerName) && !StringUtils.isEmpty(beerStyle)) {
+		} else if (!StringUtils.hasLength(beerName) && StringUtils.hasLength(beerStyleName)) {
 			//search beer_service style
 			beerPage = beerRepository.findAllByBeerStyle(beerStyle, pageRequest);
 		} else {
@@ -75,7 +76,7 @@ public class BeerServiceImpl implements BeerService
 	@Override
 	public BeerDto getById(UUID beerId, Boolean showInventoryOnHand)
 	{
-		System.out.println("  -------- getById called ------");
+//		System.out.println("  -------- getById called ------");
 
 		if (showInventoryOnHand)
 		{
@@ -102,7 +103,6 @@ public class BeerServiceImpl implements BeerService
 		Beer beer = beerRepository.findById(beerId).orElseThrow(NotFoundException::new);
 
 		beer.setBeerName(beerDto.getBeerName());
-//		beer.setBeerStyle(beerDto.getBeerType().name());
 		beer.setBeerStyle(beerDto.getBeerStyle().name());
 		beer.setPrice(beerDto.getPrice());
 		beer.setUpc(beerDto.getUpc());
@@ -123,6 +123,22 @@ public class BeerServiceImpl implements BeerService
 		catch (Exception e)
 		{
 			return false;
+		}
+	}
+
+	@Cacheable(cacheNames = "beerUpcCache", key="#beerUpc", condition = "#showInventoryOnHand == false ")
+	@Override
+	public BeerDto getByUpc(String beerUpc, Boolean showInventoryOnHand)
+	{
+		if (showInventoryOnHand)
+		{
+			return beerMapper.beerToBeerDtoWithInventory(
+				beerRepository.findByUpc(beerUpc));
+		}
+		else
+		{
+			return beerMapper.beerToBeerDto(
+				beerRepository.findByUpc(beerUpc));
 		}
 	}
 }

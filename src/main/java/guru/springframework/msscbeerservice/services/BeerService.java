@@ -20,4 +20,7 @@ public interface BeerService
 
 	boolean deleteById(UUID beerId);
 
+	BeerDto getByUpc(String beerUpc, Boolean showInventoryOnHand);
+
+
 }

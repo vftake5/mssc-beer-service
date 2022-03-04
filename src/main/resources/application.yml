@@ -3,6 +3,7 @@ sfg:
     beer-inventory-service-host: http://localhost:8082
     inventory-user: good
     inventory-password: beer
+#    request-mapping-base: /api/v1/
 spring:
   jpa:
     defer-datasource-initialization: true
