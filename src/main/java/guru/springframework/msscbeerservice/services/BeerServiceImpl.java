@@ -26,10 +26,12 @@ public class BeerServiceImpl implements BeerService
 
 	@Cacheable(cacheNames = "beerListCache", condition = "#showInventoryOnHand == false ")
 	@Override
-	public BeerPagedList listBeers(String beerName, BeerStyleEnum beerStyle, PageRequest pageRequest, Boolean showInventoryOnHand) {
-
+	public BeerPagedList listBeers(String beerName, BeerStyleEnum beerStyle, PageRequest pageRequest, Boolean showInventoryOnHand)
+	{
 		BeerPagedList beerPagedList;
 		Page<Beer> beerPage;
+
+		System.out.println("  -------- listBeers called ------");
 
 		if (!StringUtils.isEmpty(beerName) && !StringUtils.isEmpty(beerStyle)) {
 			//search both
@@ -69,9 +71,12 @@ public class BeerServiceImpl implements BeerService
 		return beerPagedList;
 	}
 
+	@Cacheable(cacheNames = "beerCache", key="#beerId", condition = "#showInventoryOnHand == false ")
 	@Override
 	public BeerDto getById(UUID beerId, Boolean showInventoryOnHand)
 	{
+		System.out.println("  -------- getById called ------");
+
 		if (showInventoryOnHand)
 		{
 			return beerMapper.beerToBeerDtoWithInventory(

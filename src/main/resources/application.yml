@@ -6,3 +6,6 @@ sfg:
 spring:
   jpa:
     defer-datasource-initialization: true
+  cache:
+    jcache:
+      config: "classpath:ehcache.xml"
