@@ -82,7 +82,14 @@ public class BeerController
 			showInventoryOnHand = false;
 		}
 
-		return new ResponseEntity<>(beerService.getByUpc(upc, showInventoryOnHand), HttpStatus.OK);
+		BeerDto responseBeerDto = beerService.getByUpc(upc, showInventoryOnHand);
+
+		if (responseBeerDto != null)
+
+			return new ResponseEntity<>(responseBeerDto, HttpStatus.OK);
+		else
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
 	}
 
 
