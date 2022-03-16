@@ -1,3 +1,6 @@
+logging:
+  level:
+    root: INFO
 sfg:
   brewery:
     beer-inventory-service-host: "http://localhost:8082"
@@ -5,13 +8,13 @@ sfg:
     inventory-password: beer
 #    request-mapping-base: /api/v1/
 spring:
-  jpa:
-    defer-datasource-initialization: true
   cache:
     jcache:
       config: "classpath:ehcache.xml"
-  datasource:
-    url: "jdbc:h2:mem:testdb;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DB_CLOSE_ON_EXIT=FALSE"
-logging:
-  level:
-    root: INFO
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.yml
+    liquibase-schema: brewery
+  jpa:
+    defer-datasource-initialization: false
+    hibernate:
+      ddl-auto: validate

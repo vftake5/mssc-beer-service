@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -24,6 +25,9 @@ public class BeerDto implements Serializable
 	static final long serialVersionUID = 4814651101159979891L;
 
 	@Null
+//	@Type(type="pg-uuid")
+	@Type(type="uuid-char")
+//	@Type(type="org.hibernate.type.PostgresUUIDType")
 	private UUID id;
 	@Null
 	private Integer version;
