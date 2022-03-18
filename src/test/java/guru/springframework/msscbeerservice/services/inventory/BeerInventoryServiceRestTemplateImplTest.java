@@ -1,6 +1,5 @@
 package guru.springframework.msscbeerservice.services.inventory;
 
-import guru.springframework.msscbeerservice.bootstap.BeerLoader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -24,8 +23,9 @@ class BeerInventoryServiceRestTemplateImplTest
 	@Test
 	void getOnhandInventory()
 	{
-		Integer quh = beerInventoryService.getOnhandInventory(BeerLoader.BEER_1_UUID);
-
-		System.out.println(quh);
+		//TODO megcsinálni UPC-vel
+//		Integer quh = beerInventoryService.getOnhandInventory(BeerLoader.BEER_1_UUID);
+//
+//		System.out.println(quh);
 	}
 }

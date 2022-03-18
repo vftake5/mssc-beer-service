@@ -1,6 +1,17 @@
 logging:
   level:
     root: INFO
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+    com:
+      zaxxer:
+        hikari:
+          HikariConfig: DEBUG
 sfg:
   brewery:
     beer-inventory-service-host: "http://localhost:8082"
