@@ -22,9 +22,9 @@ spring:
   cache:
     jcache:
       config: "classpath:ehcache.xml"
-  liquibase:
-    change-log: classpath:/db/changelog/db.changelog-master.yml
-    liquibase-schema: brewery
+#  liquibase:
+#    change-log: classpath:/db/changelog/db.changelog-master.yml
+#    liquibase-schema: brewery
   jpa:
     defer-datasource-initialization: false
     hibernate:

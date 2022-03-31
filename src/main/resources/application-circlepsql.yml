@@ -24,3 +24,6 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL95Dialect
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.yml
+    liquibase-schema: public
