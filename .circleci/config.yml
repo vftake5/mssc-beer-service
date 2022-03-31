@@ -6,6 +6,13 @@ jobs:
 
     docker:
       - image: cimg/openjdk:17.0.1
+      - image: cimg/postgres:14.0
+        auth:
+          username: vftake5
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_HOST_AUTH_METHOD: trust
 
     working_directory: ~/repo
 
@@ -20,6 +27,8 @@ jobs:
             - v1-dependencies-{{ checksum "pom.xml" }}
             - v1-dependencies-
       - run: mvn dependency:go-offline
+
+#      - run: sudo apt install -y postgresql-client || true
 
       - save_cache:
           paths:

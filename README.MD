@@ -4,3 +4,11 @@
 Spring Boot Micriservice example
 
 ### Reference documentation
+
+CircleCI setup:
+
+Project settings - Environment variables - Add Env. variable
+
+    Name: spring_profiles_active
+    Value: localpsql
+

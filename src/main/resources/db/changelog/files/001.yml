@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: "create_account_table"
+      id: "create_beer_table"
       author: "vf"
       changes:
 #        - sql:
@@ -8,7 +8,7 @@ databaseChangeLog:
 #            sql: CREATE SCHEMA IF NOT EXISTS Brewery;
         - createTable:
             tableName: beer
-            schemaName: brewery
+#            schemaName: brewery
             columns:
               - column:
                   name: id
