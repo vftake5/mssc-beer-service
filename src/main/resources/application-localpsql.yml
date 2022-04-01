@@ -20,10 +20,17 @@ spring:
         maintainTimeStats: false
   jpa:
     database: postgresql
-#    database-platform: org.hibernate.dialect.PostgreSQL95Dialect
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL95Dialect
   liquibase:
     change-log: classpath:/db/changelog/db.changelog-master.yml
     liquibase-schema: brewery
+#  rabbitmq:
+#    host: 10.98.20.115 # RabbitMQ host.
+#    username: guest  # Login user to authenticate to the broker.
+#    password: guest # Login to authenticate against the broker.
+#    port: 15672 # RabbitMQ port.
+  artemis:
+    user: artemis
+    password: simetraehcapa
