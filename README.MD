@@ -12,6 +12,16 @@ Project settings - Environment variables - Add Env. variable
     Name: spring_profiles_active
     Value: circlepsql
 
+.circleci/config.yml
+
+  Felvenni a következő adatokat:
+
+      - image: cimg/postgres:14.0
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_HOST_AUTH_METHOD: trust
+
+
 ActiveMQ Artemis run on Ubuntu virtual machine.
 
 Needed setup:
