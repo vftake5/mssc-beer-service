@@ -12,7 +12,8 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: VARCHAR(36)
+#                  type: VARCHAR(36)
+                  type: UUID
                   autoIncrement: false
                   constraints:
                     primaryKey: true

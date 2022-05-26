@@ -26,8 +26,8 @@ public class BeerDto implements Serializable
 
 	@Null
 //	@Type(type="pg-uuid")
-	@Type(type="uuid-char")
-//	@Type(type="org.hibernate.type.PostgresUUIDType")
+//	@Type(type="uuid-char")
+	@Type(type="org.hibernate.type.PostgresUUIDType")
 	private UUID id;
 	@Null
 	private Integer version;
